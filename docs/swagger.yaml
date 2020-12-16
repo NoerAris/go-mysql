@@ -1,0 +1,160 @@
+basePath: /
+definitions:
+  user.ResponseUser:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/user.User'
+        type: array
+      message:
+        type: string
+    type: object
+  user.User:
+    properties:
+      age:
+        type: integer
+      id:
+        type: integer
+      location:
+        type: string
+      name:
+        type: string
+    type: object
+host: localhost:9093
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+  description: This is a service for CRUD
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: CRUD MySql API
+  version: "1.0"
+paths:
+  /user/deleteUser/{id}:
+    delete:
+      description: Delete a user by id was input
+      parameters:
+      - description: Delete user by id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/user.ResponseUser'
+      summary: Delete a user
+      tags:
+      - Delete User
+  /user/findAll:
+    get:
+      description: Get all user
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/user.ResponseUser'
+      summary: Get all user
+      tags:
+      - Get All User
+  /user/findOne:
+    get:
+      description: Tes url with query param
+      parameters:
+      - description: First Name
+        in: query
+        name: firstName
+        required: true
+        type: string
+      - description: Last Name
+        in: query
+        name: lastName
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: Tes url with query param
+      tags:
+      - Test Param
+  /user/findOne/{id}:
+    get:
+      description: Get user by id was input
+      parameters:
+      - description: Get user by id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/user.ResponseUser'
+      summary: Get a user by id
+      tags:
+      - Get User
+  /user/saveUser:
+    post:
+      consumes:
+      - application/json
+      description: Create a new user with the input paylod
+      parameters:
+      - description: Create user
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/user.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/user.ResponseUser'
+      summary: Create a new user
+      tags:
+      - Save User
+  /user/updateUser/{id}:
+    put:
+      consumes:
+      - application/json
+      description: Update a user with the id and input paylod
+      parameters:
+      - description: Update user
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/user.User'
+      - description: Update user
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/user.ResponseUser'
+      summary: Update a user
+      tags:
+      - Update User
+swagger: "2.0"
